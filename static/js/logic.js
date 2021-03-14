@@ -41,7 +41,7 @@ function createMap(earthquakes) {
         Earthquakes: earthquakes
     };
     
-    const myMap = L.map("map", {
+    const myMap = L.map("mapid", {
         center: [
         37.09, -95.71
         ],
