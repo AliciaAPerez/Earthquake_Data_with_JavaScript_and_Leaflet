@@ -1,18 +1,21 @@
-const url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
+const queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson";
 
-d3.json(url, function (data) {
-    Features(data.features);
+d3.json(queryUrl, function (data) {
+    createFeatures(data.features);
 });
 
-function Features(earthquakeData) {
-    function onEachFeature(feature, layer) {
-        "</h3><hr><p>" = new DataCue(feature.properties.time) + "</p>";
-    }
 
+function createFeatures(earthquakeData) {
+    function onEachFeature(feature, layer) {
+        layer.bindPopup("<h3>" + feature.properties.place +
+        "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+    }
+    
     const earthquakes = L.geoJSON(earthquakeData, {
-        onEachFeature: onEachFeature
+    onEachFeature: onEachFeature
     });
-    createImageBitmap(earthquakes);
+    
+    createMap(earthquakes);
 }
 
 function createMap(earthquakes) {
